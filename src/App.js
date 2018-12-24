@@ -1,25 +1,34 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Button from "@material-ui/core/Button/Button";
+import DrawerWithHeader from "./DrawerWithHeader";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isDrawerOpen: false
+    };
+  }
+
+  toggleDrawer = () => {
+    this.setState({
+      isDrawerOpen: !this.state.isDrawerOpen
+    });
+  };
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Button variant="contained" color="primary" onClick={this.toggleDrawer}>
+          Toggle Drawer
+        </Button>
+
+        <DrawerWithHeader
+          open={this.state.isDrawerOpen}
+          onClose={this.toggleDrawer}
+        />
       </div>
     );
   }
